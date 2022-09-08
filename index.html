@@ -5,66 +5,96 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Code Quiz</title>
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
   </head>
 
   <body>
     <header>
-      <button id="high-score-btn">Highscores</button>
-      <div id="timer">
-        <p>Time left: 75 seconds</p>
+      <div class="header">
+        <div>
+          <button id="high-score-btn">Highscores</button>
+        </div>
+
+        <div>
+          <p id="timer">Time left: 75 seconds</p>
+        </div>
       </div>
     </header>
+
     <main>
       <!-- intro -->
-      <section id="intro">
-        <h1 id="quiz-intro">Coding Quiz Challenge</h1>
-        <h2 id="quiz-instruction">
-          Answer the following questions. Be aware incorrect answers are
-          penalized from your time by 5 seconds.
-        </h2>
-        <button id="start-btn">Start the Quiz</button>
-      </section>
-      <!-- questions and answers-->
-      <section id="question-list">
-        <h2 id="questions">Question</h2>
-        <ul>
-          <li>
-            <button class="answer-btns" id="answer-btn-a">Answer a</button>
-          </li>
-          <li>
-            <button class="answer-btns" id="answer-btn-b">Answer b</button>
-          </li>
-          <li>
-            <button class="answer-btns" id="answer-btn-c">Answer c</button>
-          </li>
-          <li>
-            <button class="answer-btns" id="answer-btn-d">Answer d</button>
-          </li>
-        </ul>
-        <div id="check-answer">
-          <p>Correct or Incorrect</p>
-        </div>
-      </section>
-      <!-- end of the quiz-->
-      <section id="quiz-end">
-        <div id="finished">Finished</div>
-        <p id="fin-score">Your score is:</p>
-        <p>
-          Enter your Initials
-          <input id="initals" />
-          <button id="submit-btn">Submit</button>
-        </p>
-      </section>
-      <!-- high scores-->
-      <section id="highscores">
-        <p>High Scores</p>
-        <div id="scores-record">Record</div>
-        <div>
-          <button id="back-btn">Go back</button>
-          <button id="clear-btn">Clear Highscores</button>
-        </div>
-      </section>
+      <div>
+        <section id="intro">
+          <div id="quiz-intro">
+            <h1>Coding Quiz Challenge</h1>
+            <p id="quiz-instruction">
+              Answer the following questions. Be aware incorrect answers are
+              penalized from your time by 5 seconds.
+            </p>
+            <button id="start-btn">Start the Quiz</button>
+          </div>
+        </section>
+
+        <!-- questions and answers-->
+        <section id="question-list">
+          <div>
+            <div>
+              <h2 id="questions">Question</h2>
+              <ul>
+                <li>
+                  <button class="answer-btns" id="answer-btn-a" value="a">
+                    Answer A
+                  </button>
+                </li>
+                <li>
+                  <button class="answer-btns" id="answer-btn-b" value="b">
+                    Answer B
+                  </button>
+                </li>
+                <li>
+                  <button class="answer-btns" id="answer-btn-c" value="c">
+                    Answer C
+                  </button>
+                </li>
+                <li>
+                  <button class="answer-btns" id="answer-btn-d" value="d">
+                    Answer D
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div id="check-answer">
+              <p>Correct or Incorrect</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- end of the quiz-->
+        <section id="quiz-end">
+          <div>
+            <h2 id="finished">Finished</h2>
+            <p id="fin-score">Your score is:</p>
+            <p>
+              Enter your Initials
+              <input id="initals" />
+              <button id="submit-btn">Submit</button>
+            </p>
+          </div>
+        </section>
+
+        <!-- high scores-->
+        <section id="highscores-list">
+          <div>
+            <h2>High Scores</h2>
+            <div id="scores-list"><p>List</p></div>
+            <br /><br />
+            <div>
+              <button id="back-btn">Go back</button>
+              <button id="clear-btn">Clear Highscores</button>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
     <footer>
       <p>Made by Alishah Hashwani</p>

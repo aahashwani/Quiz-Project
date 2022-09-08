@@ -1,3 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* *,
 *::before,
 *::after {
@@ -39,9 +53,9 @@ body.wrong {
   padding: 10px;
   box-shadow: 0 0 10px 2px;
   /* the two 0's = x and y offset; blur is 10px; 2px spread how far from container it goes*/
-}
+/* } */
 
-.btn-grid {
+/* .btn-grid {
   display: grid;
   grid-template-columns: repeat(2, auto);
-} */
+} */ 

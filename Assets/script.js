@@ -1,26 +1,14 @@
-// GIVEN I am taking a code quiz
-// WHEN I click the Start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and score
-
 //VARIABLES
 // intro
 var introduction = document.querySelector("#intro")
 var startBtn = document.querySelector("#start-btn")
 var quizIntro = document.querySelector("#quiz-intro")
-var quizInstruction = document.querySelector("#quiz-instruction")
+
 // questions
 var questionList = document.querySelector("#question-list")
 var questions = document.querySelector("#questions")
 // answers
-var answerBtns = document.querySelector(".answer-btns")
+var answerBtns = document.querySelectorAll(".answer-btns")
 var answerBtnA = document.querySelector("#answer-btn-a")
 var answerBtnB = document.querySelector("#answer-btn-b")
 var answerBtnC = document.querySelector("#answer-btn-c")
@@ -29,13 +17,16 @@ var answerBtnD = document.querySelector("#answer-btn-d")
 var checkAnswer = document.querySelector("#check-answer")
 // end of quiz
 var quizEnd = document.querySelector("#quiz-end")
-var finished = document.querySelector("#finished")
 var finScore = document.querySelector("#fin-score")
 var initials = document.querySelector("#initals")
+
 var submitBtn = document.querySelector("#submit-btn")
 // highscores
-var highScores = document.querySelector("#highscores")
-var scoresRecord = document.querySelector("#scores-record")
+var highScoresList = document.querySelector("#highscores-list")
+var scoresList = document.querySelector("#scores-list")
+var highScoreBtn = document.querySelector("#high-score-btn")
+var finished = document.querySelector("#finished")
+
 var backBtn = document.querySelector("#back-btn")
 var clearBtn = document.querySelector("#clear-btn")
 
@@ -81,7 +72,8 @@ var questionsQuery = [
 
 //timer
 var timer = document.getElementById("timer");
-var timeLeft = 60;
+
+var timeLeft = 75;
 var questionNum = 0;
 var score = 0;
 var questionCounter = 1;
@@ -114,13 +106,13 @@ function startQuiz(){
     showQuestion(questionNum);
 }
 
-function showQuestion (x) {
-    questions.textContent = questionQuery[x].question;
-    answerBtnA.textContent = questionQuery[x].choices[0];
-    answerBtnB.textContent = questionQuery[x].choices[1];
-    answerBtnC.textContent = questionQuery[x].choices[2];
-    answerBtnD.textContent = questionQuery[x].choices[3];
-    questionNum = x;
+function showQuestion (n) {
+    questions.textContent = questionsQuery[n].question;
+    answerBtnA.textContent = questionsQuery[n].choices[0];
+    answerBtnB.textContent = questionsQuery[n].choices[1];
+    answerBtnC.textContent = questionsQuery[n].choices[2];
+    answerBtnD.textContent = questionsQuery[n].choices[3];
+    questionNum = n;
 }
 
 function answerCheck(event) {
@@ -131,16 +123,16 @@ function answerCheck(event) {
         checkAnswer.style.display = 'none';
     }, 1000);
 
-    if (questionQuery[questionNum].answer == event.target.value) {
-        checkAnswer.textContent = "CORRRECCTTTOOOO!"; 
-        totalScore = totalScore + 1;
+    if (questionsQuery[questionNum].answer == event.target.value) {
+        checkAnswer.textContent = "Correct!"; 
+        score = score + 1;
 
     } else {
         timeLeft = timeLeft - 5;
-        checkAnswer.textContent = "INCORRECT! The correct answer is " + questionQuery[questionNum].answer + " .";
+        checkAnswer.textContent = "INCORRECT! The correct answer is " + questionsQuery[questionNum].answer + " .";
     }
          //THEN I am presented with another question
-    if (questionNum < questionQuery.length -1 ) {
+    if (questionNum < questionsQuery.length -1 ) {
     // call showQuestions to bring in next question when any reactBtn is clicked
         showQuestion(questionNum +1);
     } else {
@@ -152,14 +144,110 @@ questionCounter++;
 function quizOver() {
 
     questionList.style.display = "none";
-    finished.style.display = "block";
-    console.log(finished);
+    quizEnd.style.display = "block";
+    console.log(quizEnd);
     // show final score
-    finScore.textContent = "YOUR SCORE IS:" + totalScore ;
+    finScore.textContent = "YOUR SCORE IS:" + score ;
     // clearInterval(timerInterval);  
     timer.style.display = "none"; 
 };
 
+function highScoreList () {
+    var oldList = localStorage.getItem("HighScores");
+    if (oldList !== null ){
+        newList = JSON.parse(oldList);
+        return newList;
+    } else {
+        newList = [];
+    }
+    return newList;
+};
+
+function topScores () {
+    scoresList.innerHTML = "";
+    scoresList.style.display ="block";
+    var highScores = sort();   
+    // Slice the high score array to only show the top five high scores. 
+    var topScoresList = highScores.slice(0,15);
+    for (var i = 0; i < topScoresList.length; i++) {
+        var item = topScoresList[i];
+    // Show the score list on score board
+    var li = document.createElement("li");
+    li.textContent = item.user + " - " + item.score;
+    li.setAttribute("data-index", i);
+    scoresList.appendChild(li);
+    }
+};
+
+function sort () {
+    var unsortedList = highScoreList();
+    if (highScoreList == null ){
+        return;
+    } else{
+    unsortedList.sort(function(a,b){
+        return b.score - a.score;
+    })
+    return unsortedList;
+}};
+
+function addItem (x) {
+    var addedList = highScoreList();
+    addedList.push(x);
+    localStorage.setItem("HighScores", JSON.stringify(addedList));
+};
+
+function saveScore () {
+    var scoreItem ={
+        user: initials.value,
+        score: score
+    }
+    addItem(scoreItem);
+    topScores();
+}
+
+startBtn.addEventListener("click", startQuiz);
+
+answerBtns.forEach(function(click){
+
+    click.addEventListener("click", answerCheck);
+});
+
+submitBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    quizEnd.style.display = "none";
+    quizIntro.style.display = "none";
+    highScoresList.style.display = "block";
+    questionList.style.display ="none";
+    saveScore();
+});
+
+highScoreBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    quizEnd.style.display = "none";
+    quizIntro.style.display = "none";
+    highScoresList.style.display = "block";
+    questionList.style.display ="none";
+    topScores();
+});
+
+backBtn.addEventListener("click",function(event){
+    event.preventDefault();
+    quizEnd.style.display = "none";
+    quizIntro.style.display = "block";
+    highScoresList.style.display = "none";
+    questionList.style.display ="none";
+    location.reload();
+});
+
+clearBtn.addEventListener("click",function(event) {
+    event.preventDefault();
+    localStorage.clear();
+    topScores();
+});
+
+
+
+//click any choices button, go to the next question
 
 
 
