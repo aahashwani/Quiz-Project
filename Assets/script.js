@@ -19,79 +19,75 @@ var checkAnswer = document.querySelector("#check-answer")
 var quizEnd = document.querySelector("#quiz-end")
 var finScore = document.querySelector("#fin-score")
 var initials = document.querySelector("#initals")
-
+//submit
 var submitBtn = document.querySelector("#submit-btn")
 // highscores
 var highScoresList = document.querySelector("#highscores-list")
 var scoresList = document.querySelector("#scores-list")
 var highScoreBtn = document.querySelector("#high-score-btn")
 var finished = document.querySelector("#finished")
-
+// clear and back buttons
 var backBtn = document.querySelector("#back-btn")
 var clearBtn = document.querySelector("#clear-btn")
 
-
-//QUESTIONS LIST
-var questionsQuery = [
-    {
-        question: "Question 1: Javascript is an _______ language?",
-        choices: ["A. Object Oriented", "B. Object Base", "C. Production", "D. Boolean"],
-        answer: "A. Object Oriented"
-    },
-    {
-        question: "Question 2: Which of the following methods can be used to display data in some form using Javascript?",
-        choices: ["A. document.write()", "B .console.log()", "C. window.alert()", "D. All of the above"],
-        answer: "D. All of the above"
-    },
-    {
-        question: "Question 3: How can a datatype be declared to be a constant type?",
-        choices: ["A. const", "B. var", "C. let", "D. constant"],
-        answer: "C. let"
-    },
-    {
-        question: "Question 4: What keyword is used to check whether a given property is valid or not?",
-        choices: ["A. in", "B. is in", "C. exists", "D. lies"],
-        answer: "A. in"
-    },
-    {
-        question: "Question 5: When an operators value is NULL, the typeof returned by the unary operator is:",
-        choices: ["A. Boolean", "B. undefined", "C. object", "D. integer"],
-        answer: "C. object"
-    },
-    {
-        question: "Question 6: Which of the following is not a Javascript framework?",
-        choices: ["A. node", "B. vue", "C. react", "D. cassandra"],
-        answer: "D. cassandra"
-    },
-    {
-        question: "Question 7: How to stop an interval timer in Javascript?",
-        choices: ["A. clearInterval", "B. clearTimer", "C. intervalOver", "D. none of the above"],
-        answer: "A. clearInterval"
-    },
-]
-
 //timer
-var timer = document.getElementById("timer");
+const timer = document.getElementById("timer");
 
 var timeLeft = 75;
 var questionNum = 0;
 var score = 0;
-var questionCounter = 1;
+var questionToken = 1;
 
-function countdown() {
+var questionsQuery = [
+    {
+        question: "Question 1: Javascript is an _______ language?",
+        choices: ["A. Object Oriented", "B. Object Base", "C. Production", "D. Boolean"],
+        answer: "a"
+    },
+    {
+        question: "Question 2: Which of the following methods can be used to display data in some form using Javascript?",
+        choices: ["A. document.write()", "B .console.log()", "C. window.alert()", "D. All of the above"],
+        answer: "d"
+    },
+    {
+        question: "Question 3: How can a datatype be declared to be a constant type?",
+        choices: ["A. const", "B. var", "C. let", "D. constant"],
+        answer: "c"
+    },
+    {
+        question: "Question 4: What keyword is used to check whether a given property is valid or not?",
+        choices: ["A. in", "B. is in", "C. exists", "D. lies"],
+        answer: "a"
+    },
+    {
+        question: "Question 5: When an operators value is NULL, the typeof returned by the unary operator is:",
+        choices: ["A. Boolean", "B. undefined", "C. object", "D. integer"],
+        answer: "c"
+    },
+    {
+        question: "Question 6: Which of the following is not a Javascript framework?",
+        choices: ["A. node", "B. vue", "C. react", "D. cassandra"],
+        answer: "d"
+    },
+    {
+        question: "Question 7: How to stop an interval timer in Javascript?",
+        choices: ["A. clearInterval", "B. clearTimer", "C. intervalOver", "D. none of the above"],
+        answer: "a"
+    },
+]
+
+
+
+function countdownTimer() {
         
     var timeInterval = setInterval(function () {
-
     timeLeft--;
-      timer.textContent = "Time left: " + timeLeft + " s";
-
-        if (timeLeft <= 0){
+      timer.textContent = "TIME LEFT TILL QUIZ ENDS: " + timeLeft + " seconds";
+        if (timeLeft === 0){
             clearInterval(timeInterval);
-            timer.textContent = "TIME'S UP!"; 
             finished.textContent = "TIME'S UP!";
             quizOver();
-
-        } else  if(questionCounter >= questionsQuery.length + 1) {
+        } else  if(questionToken >= questionsQuery.length + 1) {
             clearInterval(timeInterval);
             quizOver();
             } 
@@ -102,22 +98,21 @@ function startQuiz(){
     quizIntro.style.display="none";
     questionList.style.display="block";
     questionNum = 0
-    countdown();
-    showQuestion(questionNum);
+    countdownTimer();
+    questionsAndAnswers(questionNum);
 }
 
-function showQuestion (n) {
-    questions.textContent = questionsQuery[n].question;
-    answerBtnA.textContent = questionsQuery[n].choices[0];
-    answerBtnB.textContent = questionsQuery[n].choices[1];
-    answerBtnC.textContent = questionsQuery[n].choices[2];
-    answerBtnD.textContent = questionsQuery[n].choices[3];
-    questionNum = n;
+function questionsAndAnswers (x) {
+    questions.textContent = questionsQuery[x].question;
+    answerBtnA.textContent = questionsQuery[x].choices[0];
+    answerBtnB.textContent = questionsQuery[x].choices[1];
+    answerBtnC.textContent = questionsQuery[x].choices[2];
+    answerBtnD.textContent = questionsQuery[x].choices[3];
+    questionNum = x;
 }
 
 function answerCheck(event) {
     event.preventDefault();
-    //make it display
     checkAnswer.style.display = "block";
     setTimeout(function () {
         checkAnswer.style.display = 'none';
@@ -131,14 +126,12 @@ function answerCheck(event) {
         timeLeft = timeLeft - 5;
         checkAnswer.textContent = "INCORRECT! The correct answer is " + questionsQuery[questionNum].answer + " .";
     }
-         //THEN I am presented with another question
     if (questionNum < questionsQuery.length -1 ) {
-    // call showQuestions to bring in next question when any reactBtn is clicked
-        showQuestion(questionNum +1);
+        questionsAndAnswers(questionNum +1);
     } else {
     quizOver();
 }
-questionCounter++;
+questionToken++;
 }
 
 function quizOver() {
@@ -146,9 +139,7 @@ function quizOver() {
     questionList.style.display = "none";
     quizEnd.style.display = "block";
     console.log(quizEnd);
-    // show final score
     finScore.textContent = "YOUR SCORE IS:" + score ;
-    // clearInterval(timerInterval);  
     timer.style.display = "none"; 
 };
 
@@ -167,11 +158,9 @@ function topScores () {
     scoresList.innerHTML = "";
     scoresList.style.display ="block";
     var highScores = sort();   
-    // Slice the high score array to only show the top five high scores. 
     var topScoresList = highScores.slice(0,15);
     for (var i = 0; i < topScoresList.length; i++) {
         var item = topScoresList[i];
-    // Show the score list on score board
     var li = document.createElement("li");
     li.textContent = item.user + " - " + item.score;
     li.setAttribute("data-index", i);
@@ -196,7 +185,7 @@ function addItem (x) {
     localStorage.setItem("HighScores", JSON.stringify(addedList));
 };
 
-function saveScore () {
+function scoreStorage () {
     var scoreItem ={
         user: initials.value,
         score: score
@@ -218,7 +207,7 @@ submitBtn.addEventListener("click", function(event) {
     quizIntro.style.display = "none";
     highScoresList.style.display = "block";
     questionList.style.display ="none";
-    saveScore();
+    scoreStorage();
 });
 
 highScoreBtn.addEventListener("click", function(event) {
@@ -245,28 +234,3 @@ clearBtn.addEventListener("click",function(event) {
     topScores();
 });
 
-
-
-//click any choices button, go to the next question
-
-
-
-// const startButton = document.getElementById ('start-btn')
-// const questionContainerElement = document.getElementById('question-container')
-
-// startButton.addEventListener('click' , startGame)
-
-// function startGame(){
-//     console.log('started')
-//     startButton.classList.add('hide')
-//     questionContainerElement.classList.remove('hide')
-
-// }
-
-// function setNextQuestion(){
-
-// }
-
-// function selectAnswer(){
-
-// }
