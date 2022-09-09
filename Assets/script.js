@@ -160,11 +160,11 @@ function topScores () {
     var highScores = sort();   
     var topScoresList = highScores.slice(0,15);
     for (var i = 0; i < topScoresList.length; i++) {
-        var item = topScoresList[i];
-    var li = document.createElement("li");
-    li.textContent = item.user + " - " + item.score;
-    li.setAttribute("data-index", i);
-    scoresList.appendChild(li);
+        var scoreList = topScoresList[i];
+    var list = document.createElement("div");
+    list.textContent = scoreList.user + " : " + scoreList.score;
+    list.setAttribute("dataIndex", i);
+    scoresList.appendChild(list);
     }
 };
 
