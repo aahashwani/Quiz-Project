@@ -2,7 +2,6 @@
 const introduction = document.querySelector("#intro")
 const startBtn = document.querySelector("#start-btn")
 const quizIntro = document.querySelector("#quiz-intro")
-
 // questions
 const questionList = document.querySelector("#question-list")
 const questions = document.querySelector("#questions")
@@ -28,10 +27,8 @@ const finished = document.querySelector("#finished")
 // clear and back buttons
 const backBtn = document.querySelector("#back-btn")
 const clearBtn = document.querySelector("#clear-btn")
-
 //timer
 const timer = document.getElementById("timer");
-
 // functional time, score and question variables
 var timeLeft = 75;
 var questionNum = 0;
