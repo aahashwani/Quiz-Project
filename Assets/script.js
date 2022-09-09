@@ -202,27 +202,20 @@ answerBtns.forEach(function(clk){
 submitBtn.addEventListener("click", function(e) {
     e.preventDefault();
     quizEnd.style.display = "none";
-    quizIntro.style.display = "none";
     highScoresList.style.display = "inline";
-    questionList.style.display ="none";
     scoreStorage();
 });
 
 highScoreBtn.addEventListener("click", function(e) {
     e.preventDefault();
-    quizEnd.style.display = "none";
     quizIntro.style.display = "none";
     highScoresList.style.display = "inline";
-    questionList.style.display ="none";
     topScores();
 });
 
 backBtn.addEventListener("click",function(e){
     e.preventDefault();
-    quizEnd.style.display = "none";
     quizIntro.style.display = "inline";
-    highScoresList.style.display = "none";
-    questionList.style.display ="none";
     location.reload();
 });
 
