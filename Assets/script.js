@@ -109,14 +109,13 @@ function questionsAndAnswers (x) {
     questionNum = x;
 }
 
-function answerCheck(event) {
-    event.preventDefault();
+function answerCheck(e) {
     checkAnswer.style.display = "inline";
     setTimeout(function () {
         checkAnswer.style.display = 'none';
     }, 1000);
 
-    if (questionsQuery[questionNum].answer == event.target.value) {
+    if (questionsQuery[questionNum].answer == e.target.value) {
         checkAnswer.textContent = "CORRECT!"; 
         score ++;
 
@@ -133,10 +132,8 @@ questionToken ++;
 }
 
 function quizOver() {
-
     questionList.style.display = "none";
     quizEnd.style.display = "inline";
-    console.log(quizEnd);
     finScore.textContent = "YOUR SCORE IS:" + score ;
     timer.style.display = "none"; 
 };
@@ -153,7 +150,6 @@ function highScoreList () {
 };
 
 function topScores () {
-    scoresList.innerHTML = "";
     scoresList.style.display ="inline";
     const highScores = organizeScores ();   
     const topScoresList = highScores.slice(0,15);
@@ -199,28 +195,24 @@ answerBtns.forEach(function(clk){
     clk.addEventListener("click", answerCheck);
 });
 
-submitBtn.addEventListener("click", function(e) {
-    e.preventDefault();
+submitBtn.addEventListener("click", function() {
     quizEnd.style.display = "none";
     highScoresList.style.display = "inline";
     scoreStorage();
 });
 
-highScoreBtn.addEventListener("click", function(e) {
-    e.preventDefault();
+highScoreBtn.addEventListener("click", function() {
     quizIntro.style.display = "none";
     highScoresList.style.display = "inline";
     topScores();
 });
 
-backBtn.addEventListener("click",function(e){
-    e.preventDefault();
+backBtn.addEventListener("click",function(){
     quizIntro.style.display = "inline";
     location.reload();
 });
 
-clearBtn.addEventListener("click",function(e) {
-    e.preventDefault();
+clearBtn.addEventListener("click",function() {
     localStorage.clear();
     topScores();
 });
