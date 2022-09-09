@@ -17,7 +17,7 @@ const checkAnswer = document.querySelector("#check-answer")
 // end of quiz
 const quizEnd = document.querySelector("#quiz-end")
 const finScore = document.querySelector("#fin-score")
-const name = document.querySelector("#name")
+const name1 = document.querySelector("#name")
 //submit
 const submitBtn = document.querySelector("#submit-btn")
 // highscores
@@ -171,8 +171,8 @@ function organizeScores () {
     if (highScoreList == null ){
         return;
     } else{
-    unsortedList.sort(function( a, b ){
-        return b.score - a.score;
+    unsortedList.sort(function(a, b){
+        return a.score - b.score;
     })
     return unsortedList;
 }};
@@ -185,7 +185,7 @@ function addScores (x) {
 
 function scoreStorage () {
     const scoreItem ={
-        user: name.value,
+        user: name1.value,
         score: score
     }
     addScores(scoreItem);
