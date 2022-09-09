@@ -1,86 +1,84 @@
-//VARIABLES
 // intro
-var introduction = document.querySelector("#intro")
-var startBtn = document.querySelector("#start-btn")
-var quizIntro = document.querySelector("#quiz-intro")
+const introduction = document.querySelector("#intro")
+const startBtn = document.querySelector("#start-btn")
+const quizIntro = document.querySelector("#quiz-intro")
 
 // questions
-var questionList = document.querySelector("#question-list")
-var questions = document.querySelector("#questions")
+const questionList = document.querySelector("#question-list")
+const questions = document.querySelector("#questions")
 // answers
-var answerBtns = document.querySelectorAll(".answer-btns")
-var answerBtnA = document.querySelector("#answer-btn-a")
-var answerBtnB = document.querySelector("#answer-btn-b")
-var answerBtnC = document.querySelector("#answer-btn-c")
-var answerBtnD = document.querySelector("#answer-btn-d")
+const answerBtns = document.querySelectorAll(".answer-btns")
+const answerBtnA = document.querySelector("#answer-btn-a")
+const answerBtnB = document.querySelector("#answer-btn-b")
+const answerBtnC = document.querySelector("#answer-btn-c")
+const answerBtnD = document.querySelector("#answer-btn-d")
 // check answer
-var checkAnswer = document.querySelector("#check-answer")
+const checkAnswer = document.querySelector("#check-answer")
 // end of quiz
-var quizEnd = document.querySelector("#quiz-end")
-var finScore = document.querySelector("#fin-score")
-var initials = document.querySelector("#initals")
+const quizEnd = document.querySelector("#quiz-end")
+const finScore = document.querySelector("#fin-score")
+const name = document.querySelector("#name")
 //submit
-var submitBtn = document.querySelector("#submit-btn")
+const submitBtn = document.querySelector("#submit-btn")
 // highscores
-var highScoresList = document.querySelector("#highscores-list")
-var scoresList = document.querySelector("#scores-list")
-var highScoreBtn = document.querySelector("#high-score-btn")
-var finished = document.querySelector("#finished")
+const highScoresList = document.querySelector("#highscores-list")
+const scoresList = document.querySelector("#scores-list")
+const highScoreBtn = document.querySelector("#high-score-btn")
+const finished = document.querySelector("#finished")
 // clear and back buttons
-var backBtn = document.querySelector("#back-btn")
-var clearBtn = document.querySelector("#clear-btn")
+const backBtn = document.querySelector("#back-btn")
+const clearBtn = document.querySelector("#clear-btn")
 
 //timer
 const timer = document.getElementById("timer");
 
+// functional time, score and question variables
 var timeLeft = 75;
 var questionNum = 0;
 var score = 0;
 var questionToken = 1;
 
-var questionsQuery = [
+const questionsQuery = [
     {
         question: "Question 1: Javascript is an _______ language?",
         choices: ["A. Object Oriented", "B. Object Base", "C. Production", "D. Boolean"],
-        answer: "a"
+        answer: "A"
     },
     {
         question: "Question 2: Which of the following methods can be used to display data in some form using Javascript?",
         choices: ["A. document.write()", "B .console.log()", "C. window.alert()", "D. All of the above"],
-        answer: "d"
+        answer: "D"
     },
     {
         question: "Question 3: How can a datatype be declared to be a constant type?",
         choices: ["A. const", "B. var", "C. let", "D. constant"],
-        answer: "c"
+        answer: "C"
     },
     {
         question: "Question 4: What keyword is used to check whether a given property is valid or not?",
         choices: ["A. in", "B. is in", "C. exists", "D. lies"],
-        answer: "a"
+        answer: "A"
     },
     {
         question: "Question 5: When an operators value is NULL, the typeof returned by the unary operator is:",
         choices: ["A. Boolean", "B. undefined", "C. object", "D. integer"],
-        answer: "c"
+        answer: "C"
     },
     {
         question: "Question 6: Which of the following is not a Javascript framework?",
         choices: ["A. node", "B. vue", "C. react", "D. cassandra"],
-        answer: "d"
+        answer: "D"
     },
     {
         question: "Question 7: How to stop an interval timer in Javascript?",
         choices: ["A. clearInterval", "B. clearTimer", "C. intervalOver", "D. none of the above"],
-        answer: "a"
+        answer: "A"
     },
 ]
 
-
-
 function countdownTimer() {
         
-    var timeInterval = setInterval(function () {
+    const timeInterval = setInterval(function () {
     timeLeft--;
       timer.textContent = "TIME LEFT TILL QUIZ ENDS: " + timeLeft + " seconds";
         if (timeLeft === 0){
@@ -96,7 +94,7 @@ function countdownTimer() {
 
 function startQuiz(){
     quizIntro.style.display="none";
-    questionList.style.display="block";
+    questionList.style.display="inline";
     questionNum = 0
     countdownTimer();
     questionsAndAnswers(questionNum);
@@ -113,38 +111,38 @@ function questionsAndAnswers (x) {
 
 function answerCheck(event) {
     event.preventDefault();
-    checkAnswer.style.display = "block";
+    checkAnswer.style.display = "inline";
     setTimeout(function () {
         checkAnswer.style.display = 'none';
     }, 1000);
 
     if (questionsQuery[questionNum].answer == event.target.value) {
         checkAnswer.textContent = "Correct!"; 
-        score = score + 1;
+        score ++;
 
     } else {
         timeLeft = timeLeft - 5;
-        checkAnswer.textContent = "INCORRECT! The correct answer is " + questionsQuery[questionNum].answer + " .";
+        checkAnswer.textContent = "INCORRECT! The correct answer is " + questionsQuery[questionNum].answer;
     }
     if (questionNum < questionsQuery.length -1 ) {
         questionsAndAnswers(questionNum +1);
     } else {
     quizOver();
 }
-questionToken++;
+questionToken ++;
 }
 
 function quizOver() {
 
     questionList.style.display = "none";
-    quizEnd.style.display = "block";
+    quizEnd.style.display = "inline";
     console.log(quizEnd);
     finScore.textContent = "YOUR SCORE IS:" + score ;
     timer.style.display = "none"; 
 };
 
 function highScoreList () {
-    var oldList = localStorage.getItem("HighScores");
+    const oldList = localStorage.getItem("HighScores");
     if (oldList !== null ){
         newList = JSON.parse(oldList);
         return newList;
@@ -156,80 +154,80 @@ function highScoreList () {
 
 function topScores () {
     scoresList.innerHTML = "";
-    scoresList.style.display ="block";
-    var highScores = sort();   
-    var topScoresList = highScores.slice(0,15);
+    scoresList.style.display ="inline";
+    const highScores = organizeScores ();   
+    const topScoresList = highScores.slice(0,15);
     for (var i = 0; i < topScoresList.length; i++) {
-        var scoreList = topScoresList[i];
-    var list = document.createElement("div");
+        const scoreList = topScoresList[i];
+    const list = document.createElement("div");
     list.textContent = scoreList.user + " : " + scoreList.score;
-    list.setAttribute("dataIndex", i);
+    list.setAttribute("names", i);
     scoresList.appendChild(list);
     }
 };
 
-function sort () {
-    var unsortedList = highScoreList();
+function organizeScores () {
+    const unsortedList = highScoreList();
     if (highScoreList == null ){
         return;
     } else{
-    unsortedList.sort(function(a,b){
+    unsortedList.sort(function( a, b ){
         return b.score - a.score;
     })
     return unsortedList;
 }};
 
-function addItem (x) {
-    var addedList = highScoreList();
+function addScores (x) {
+    const addedList = highScoreList();
     addedList.push(x);
     localStorage.setItem("HighScores", JSON.stringify(addedList));
 };
 
 function scoreStorage () {
-    var scoreItem ={
-        user: initials.value,
+    const scoreItem ={
+        user: name.value,
         score: score
     }
-    addItem(scoreItem);
+    addScores(scoreItem);
     topScores();
 }
 
 startBtn.addEventListener("click", startQuiz);
 
-answerBtns.forEach(function(click){
+answerBtns.forEach(function(clk){
 
-    click.addEventListener("click", answerCheck);
+    clk.addEventListener("click", answerCheck);
 });
 
-submitBtn.addEventListener("click", function(event) {
-    event.preventDefault();
+submitBtn.addEventListener("click", function(e) {
+    e.preventDefault();
     quizEnd.style.display = "none";
     quizIntro.style.display = "none";
-    highScoresList.style.display = "block";
+    highScoresList.style.display = "inline";
     questionList.style.display ="none";
     scoreStorage();
 });
 
-highScoreBtn.addEventListener("click", function(event) {
-    event.preventDefault();
+highScoreBtn.addEventListener("click", function(e) {
+    e.preventDefault();
     quizEnd.style.display = "none";
     quizIntro.style.display = "none";
-    highScoresList.style.display = "block";
+    highScoresList.style.display = "inline";
     questionList.style.display ="none";
     topScores();
 });
 
-backBtn.addEventListener("click",function(event){
-    event.preventDefault();
+backBtn.addEventListener("click",function(e){
+    e.preventDefault();
     quizEnd.style.display = "none";
-    quizIntro.style.display = "block";
+    quizIntro.style.display = "inline";
     highScoresList.style.display = "none";
     questionList.style.display ="none";
     location.reload();
 });
 
-clearBtn.addEventListener("click",function(event) {
-    event.preventDefault();
+clearBtn.addEventListener("click",function(e) {
+    e.preventDefault();
     localStorage.clear();
     topScores();
 });

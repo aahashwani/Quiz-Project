@@ -15,6 +15,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   min-height: 100vh;
+  /* background-image: linear-gradient(pink, white, lightblue, lightgoldenrodyellow); */
   background-image: url("https://images.pexels.com/photos/743986/pexels-photo-743986.jpeg");
   background-repeat: no-repeat;
   background-position:center; 
@@ -41,14 +42,7 @@ ul {
   display:none;
 } 
 
-.answer-btns {
-  background-color: pink;
-  font-size: 30px;
-  box-shadow: 1px 3px;
-
-}
-
-#high-score-btn {
+#high-score-btn, #submit-btn, #back-btn, #clear-btn, .answer-btns {
   background-color: pink;
   font-size: 30px;
   box-shadow: 1px 3px;
@@ -65,24 +59,6 @@ ul {
   box-shadow: 1px 3px;
 }
 
-#submit-btn {
-  background-color: pink;
-  font-size: 30px;
-  box-shadow: 1px 3px;
-}
-
-#back-btn {
-  background-color: pink;
-  font-size: 30px;
-  box-shadow: 1px 3px;
-}
-
-#clear-btn {
-  background-color: pink;
-  font-size: 30px;
-  box-shadow: 1px 3px;
-}
-
 input{
   background-color: lightgoldenrodyellow;
   font-size: 30px;
@@ -91,11 +67,6 @@ input{
 #highscores-list {
   color: blueviolet;
   font-size: 30px;
-}
-footer {
-  color: white;
-  font-size: 50px;
-  font-weight: bold;
 }
 
 #check-answer {

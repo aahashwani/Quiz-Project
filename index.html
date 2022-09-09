@@ -7,83 +7,60 @@
     <title>Code Quiz</title>
     <link rel="stylesheet" href="./Assets/css/style.css" />
   </head>
-
   <body>
     <header>
-      <button id="high-score-btn">Highscores</button>
-
+      <button id="high-score-btn">HIGHSCORES</button>
       <p id="timer">TIME LEFT TILL QUIZ ENDS: 75 seconds</p>
     </header>
-
     <main>
-      <!-- intro -->
         <section id="intro">
           <div id="quiz-intro">
             <h1>Coding Quiz Challenge</h1>
             <p id="quiz-instruction">
               Answer the following questions. Be aware incorrect answers are
-              penalized from your time by 5 seconds.
+              penalized and will deduct 5 seconds from your time.
             </p>
             <button id="start-btn">Start the Quiz</button>
         </section>
-
-        <!-- questions and answers-->
         <section id="question-list">
-              <h2 id="questions">Question</h2>
+              <h2 id="questions"></h2>
               <ul>
                 <li>
-                  <button class="answer-btns" id="answer-btn-a" value="a">
-                    Answer A
-                  </button>
+                  <button class="answer-btns" id="answer-btn-a" value="A"></button>
                 </li>
                 <li>
-                  <button class="answer-btns" id="answer-btn-b" value="b">
-                    Answer B
-                  </button>
+                  <button class="answer-btns" id="answer-btn-b" value="B"></button>
                 </li>
                 <li>
-                  <button class="answer-btns" id="answer-btn-c" value="c">
-                    Answer C
-                  </button>
+                  <button class="answer-btns" id="answer-btn-c" value="C"></button>
                 </li>
                 <li>
-                  <button class="answer-btns" id="answer-btn-d" value="d">
-                    Answer D
-                  </button>
+                  <button class="answer-btns" id="answer-btn-d" value="D"></button>
                 </li>
               </ul>
             </div>
-            <div id="check-answer">
-              <p>Correct or Incorrect</p>
+            <div id="check-answer"> </div>
         </section>
-
-        <!-- end of the quiz-->
         <section id="quiz-end">
-            <h2 id="finished">Finished</h2>
+            <h2 id="finished">FINISHED</h2>
             <p id="fin-score">Your score is:</p>
             <p>
-              Enter your Initials
-              <input id="initals" />
-              <button id="submit-btn">Submit</button>
+              Enter your name
+              <input id="name"/>
+              <button id="submit-btn">SUBMIT</button>
             </p>
         </section>
-
-        <!-- high scores-->
         <section id="highscores-list">
-            <h2>High Scores</h2>
-            <div id="scores-list"><p>List</p></div> 
-            <p> </p>
-            <p> </p>
-
+            <h2>HIGHSCORES</h2>
+            <div id="scores-list"></div> 
+            <p>   </p>
+            <p>   </p>
             <div>
-              <button id="back-btn">Go back</button>
-              <button id="clear-btn">Clear Highscores</button>
+              <button id="back-btn">GO BACK</button>
+              <button id="clear-btn">CLEAR HIGHSCORES</button>
             </div>
         </section>
     </main>
-    <footer>
-      <p>ENJOY THE GAME</p>
-    </footer>
     <script src="./Assets/script.js"></script>
   </body>
 </html>
