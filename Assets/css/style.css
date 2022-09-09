@@ -9,6 +9,11 @@ header{
   align-items: center;
 }
 
+h1 {
+  font-size: 70px;
+  font-weight: bold;
+}
+
 body {
   display:flex;
   flex-direction: column;
@@ -44,7 +49,7 @@ ul {
 
 #high-score-btn, #submit-btn, #back-btn, #clear-btn, .answer-btns {
   background-color: pink;
-  font-size: 30px;
+  font-size: 50px;
   box-shadow: 1px 3px;
 }
 
@@ -55,25 +60,29 @@ ul {
 
 #start-btn {
   background-color: lightblue;
-  font-size: 30px;
+  font-size: 50px;
   box-shadow: 1px 3px;
 }
 
 input{
   background-color: lightgoldenrodyellow;
-  font-size: 30px;
+  font-size: 50px;
 }
 
 #highscores-list {
   color: blueviolet;
-  font-size: 30px;
+  font-size: 50px;
 }
 
 #check-answer {
-  font-size: 30px;
+  font-size: 50px;
   font-weight: bold;
 }
 
 p {
-  font-size: 30px;
+  font-size: 50px;
+}
+
+#questions, #finished {
+  font-size: 50px;
 }
