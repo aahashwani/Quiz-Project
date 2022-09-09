@@ -117,7 +117,7 @@ function answerCheck(event) {
     }, 1000);
 
     if (questionsQuery[questionNum].answer == event.target.value) {
-        checkAnswer.textContent = "Correct!"; 
+        checkAnswer.textContent = "CORRECT!"; 
         score ++;
 
     } else {
@@ -172,7 +172,7 @@ function organizeScores () {
         return;
     } else{
     unsortedList.sort(function(a, b){
-        return a.score - b.score;
+        return b.score - a.score;
     })
     return unsortedList;
 }};
